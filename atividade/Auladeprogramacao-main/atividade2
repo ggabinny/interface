@@ -1,0 +1,59 @@
+O objetivo do sistema está claro para os usuários finais, como secretaria, professores e alunos?
+Sim. O objetivo do sistema é gerenciar alunos, professores, disciplinas, matrículas, pesquisas e relatórios acadêmicos.
+
+Quais funcionalidades são obrigatórias para considerar o sistema pronto: cadastro de alunos, professores, disciplinas, matrículas, pesquisa e relatórios?
+As funcionalidades obrigatórias são cadastro de alunos, professores e disciplinas, matrícula de alunos, pesquisa de alunos por nome, edição de dados, remoção lógica de matrículas e geração de relatórios em JSON e PDF.
+
+Todos os campos obrigatórios dos formulários estão validados corretamente antes de salvar no banco?
+Parcialmente. O banco exige campos obrigatórios com NOT NULL, mas ainda é importante validar melhor os campos nos formulários antes de salvar.
+
+O sistema impede cadastros duplicados de CPF, matrícula de aluno, registro de professor e código de disciplina?
+Sim. O banco possui restrições UNIQUE para impedir CPF, matrícula, registro e código duplicados.
+
+A pesquisa de alunos por nome funciona com nomes completos, partes do nome e diferenças entre letras maiúsculas e minúsculas?
+Sim. A pesquisa usa comparação com LOWER(), permitindo buscar por nome completo, parte do nome e ignorando maiúsculas e minúsculas.
+
+O fluxo de matrícula impede que o mesmo aluno seja matriculado duas vezes na mesma disciplina?
+Sim. O sistema verifica se a matrícula já existe e mostra alerta quando o aluno já está matriculado naquela disciplina.
+
+A remoção de matrículas está funcionando conforme esperado, mantendo o histórico no banco quando necessário?
+Sim. A matrícula não é apagada do banco. Ela recebe ativo = 0 e a data de remoção em removido_em.
+
+O método de remover dados do aluno em Aluno.py está coerente com a regra de negócio definida para o projeto?
+Parcialmente. O método limpa os dados do aluno e remove seus vínculos com disciplinas, mas na versão web a regra principal usa banco de dados e remoção lógica, então ele precisa estar alinhado com essa regra.
+
+As telas de cadastro, edição, listagem e pesquisa apresentam mensagens claras de sucesso, erro ou alerta?
+Sim. O sistema apresenta mensagens como “Aluno cadastrado com sucesso”, “Aluno atualizado com sucesso” e “Já existe aluno com este CPF ou matrícula”.
+
+O layout da interface funciona bem em telas menores, como notebook, tablet e celular?
+Precisa ser conferido visualmente. O sistema possui CSS próprio, mas a homologação deve testar a interface em diferentes tamanhos de tela.
+
+Os relatórios em JSON e PDF mostram todos os dados necessários para conferência acadêmica?
+Sim. Os relatórios mostram alunos, professores, disciplinas e matrículas, incluindo o status das matrículas.
+
+O banco MySQL pode ser criado corretamente a partir do arquivo schema.sql em um ambiente novo?
+Sim. O arquivo schema.sql cria o banco, as tabelas, os relacionamentos, as restrições e dados iniciais.
+
+O modo SQLite local funciona corretamente quando o MySQL não está disponível?
+Sim. Quando o MySQL não está disponível, o sistema usa automaticamente um banco SQLite local chamado sistema_academico.sqlite3.
+
+As instruções do README e da documentação permitem que outra pessoa instale e execute o projeto sem ajuda do professor?
+Sim, em parte. O README explica como criar o banco, instalar dependências, configurar conexão e executar o sistema. A documentação também ajuda, mas poderia ter mais testes passo a passo.
+
+Existem testes manuais documentados para cadastro, edição, pesquisa, matrícula, remoção e relatórios?
+Parcialmente. A documentação cita validações realizadas, mas seria melhor criar uma lista formal de testes manuais com os resultados esperados.
+
+O sistema foi testado com dados válidos, dados incompletos, dados duplicados e dados digitados incorretamente?
+Parcialmente. Existem tratamentos para dados duplicados e algumas validações básicas, mas ainda é necessário documentar testes com dados incompletos e inválidos.
+
+As mensagens, nomes de campos e textos das telas estão padronizados em português e sem ambiguidades?
+Sim, em geral. As mensagens estão em português, mas algumas estão sem acentuação, como “Matricula” e “Ja”, então poderiam ser padronizadas.
+
+O projeto está protegido contra usos inadequados básicos, como envio de formulários vazios ou valores inválidos?
+Parcialmente. O banco protege contra campos nulos e duplicados, mas o sistema ainda pode melhorar validações de formulários vazios, carga horária inválida e formatos de CPF.
+
+O sistema possui configurações adequadas para uso fora do ambiente de desenvolvimento, como chave secreta e modo debug desativado?
+Parcialmente. O sistema permite usar FLASK_SECRET_KEY, mas ainda possui chave padrão de desenvolvimento e executa com debug=True, o que deve ser alterado para produção.
+
+A equipe definiu quem irá aprovar a homologação final e quais critérios precisam estar atendidos para liberar o uso do sistema?
+Ainda precisa ser definido. A equipe deve indicar o responsável pela aprovação, como o professor Felipe Douglas, e listar os critérios mínimos para liberar o sistema.
